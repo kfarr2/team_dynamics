@@ -14,7 +14,6 @@ Create a local copy of the settings, and configure the following values:
 - HIGHLIGHTED_PROJECT_ATTRIBUTE_ID
 - HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID
 
-    
     cd team_dynamics/settings/local.py.template team_dynamics/settings/local.py
     vi team_dynamics/settings/local.py
 
