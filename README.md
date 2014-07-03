@@ -8,11 +8,11 @@
 
 Create a local copy of the settings, and configure the following values:
 
-    -SECRET_KEY
-    -BEID
-    -WEB_SERVICES_KEY
-    -HIGHLIGHTED_PROJECT_ATTRIBUTE_ID
-    -HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID
+    - SECRET_KEY
+    - BEID
+    - WEB_SERVICES_KEY
+    - HIGHLIGHTED_PROJECT_ATTRIBUTE_ID
+    - HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID
 
 Ask the repo manager for these.
     
