@@ -13,9 +13,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         return get_info() 
 
-# Static specified attributes
-HIGHLIGHTED_PROJECT_ATTRIBUTE_ID = 9279
-HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID = 21848
 
 default_kwargs = {
         "headers": {"content-type": "text/json"},
@@ -38,7 +35,7 @@ def get_projects():
     r = post('auth/loginadmin', data = json.dumps({"BEID": settings.BEID, "WebServicesKey": settings.WEB_SERVICES_KEY}))
     # save the authentication cookie for future requests to the API
     default_kwargs['cookies'] = r.cookies
-    r = post("projects/search", data=json.dumps({"CustomAttributes": [{"ID": HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
+    r = post("projects/search", data=json.dumps({"CustomAttributes": [{"ID": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
     return r.json()
 
 
