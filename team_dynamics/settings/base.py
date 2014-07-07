@@ -28,7 +28,7 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['10.0.0.10']
+ALLOWED_HOSTS = ['10.0.0.10', 'td.dev.research.pdx.edu', '127.0.0.1']
 
 
 # Application definition
@@ -62,7 +62,7 @@ WSGI_APPLICATION = 'team_dynamics.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 
