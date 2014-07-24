@@ -31,3 +31,6 @@ In order to update the database, use the management command 'forceupdate'
     from django.core.management import call_command
     call_command('forceupdate')
     
+or
+
+    ./manage.py forceupdate

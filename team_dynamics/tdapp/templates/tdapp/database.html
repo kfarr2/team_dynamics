@@ -29,7 +29,7 @@
                     <div class="tab-content" style="display:none">
                         <div class="tab-pane active">
                             <div class="well well-lg">
-                                <p><b>Project Description:</b> {{ table.description }}</p>
+                                <p><b>Project Description:</b> {{ table.description|linebreaksbr|urlize }}</p>
                                 <p><b>Account Name:</b> {{ table.account_name }}</p>
                                 <p><b>Sponsor Name:</b> {{ table.sponsor_name }}</p>
                                 <table class="table table-bordered"><tr>
