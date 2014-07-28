@@ -41,16 +41,16 @@ def get_projects():
     r = post('auth/loginadmin', data=json.dumps({"BEID": settings.BEID, "WebServicesKey": settings.WEB_SERVICES_KEY}))
     if not r:
         message = 'Error: post failed. Unable to get login cookie. Issue with BEID or WebServicesKey.'
+        mail_admins(subject=subject, message=message, fail_silently=False)
+        return
 
-    # save the authentication cookie for future requests to the API
+    # save the authentication header for future requests to the API
     default_kwargs['headers']['Authorization'] = "Bearer " + r.content
     r = post("projects/search", data=json.dumps({"CustomAttributes": [{"ID": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
     if not r:
         message = 'Error: post failed. Authorization header is invalid. API may have changed.'
-
-    # send error message if necessary
-    if message:
-        mail_admins(subject=subject, message='TESTING. PLEASE IGNORE.'+message, fail_silently=False)
+        mail_admins(subject=subject, message=message, fail_silently=False)
+        return 
 
     return r.json()
 
