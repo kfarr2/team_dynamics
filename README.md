@@ -22,7 +22,6 @@ Ask the repo manager for the specific values.
 Sync the DB
     
     ./manage.py syncdb
-    ./manage.py migrate
 
 ##Management command
 

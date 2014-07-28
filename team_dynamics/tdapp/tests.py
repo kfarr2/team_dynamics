@@ -20,6 +20,9 @@ class StdViewTest(TestCase):
 
 
 class ForceUpdateTest(TestCase):
+    '''
+    Tests the force update function to ensure the most recent update is being viewed
+    '''
     def test(self):
         date = now().replace(microsecond=0)
         make(UpdateCheck, last_update=date)
@@ -28,6 +31,9 @@ class ForceUpdateTest(TestCase):
 
 
 class UpdateTableTest(TestCase):
+    '''
+    Tests to ensure the correct values and number of objects are being pushed to the database
+    '''
     def test(self):
         projects = [
                 {"ID": 5, "Name": "foo", "Description": "foo", "StartDate": "2014-07-03 20:42:23+00:00", "EndDate": "2014-07-03 20:42:23+00:00", "AccountName": "foo", "SponsorName": "bar"}
