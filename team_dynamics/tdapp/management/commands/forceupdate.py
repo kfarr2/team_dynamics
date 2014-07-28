@@ -3,6 +3,7 @@ import time, datetime
 import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.core.mail import mail_admins
 from django.utils.timezone import utc
 from team_dynamics.tdapp.models import Project, UpdateCheck
 
@@ -15,9 +16,10 @@ class Command(BaseCommand):
 
 
 default_kwargs = {
-        "headers": {"content-type": "text/json"},
-        "cookies": {}
-        }
+    "headers": {
+        "content-type": "text/json",
+    },
+}
 
 
 def post(endpoint, **kwargs):
@@ -31,11 +33,25 @@ def get_projects():
     '''
     gets a json object using the get function defined above. returns to calling function
     '''
+    # prep for error message
+    message = ''
+    subject = 'team dynamix automatic error report'
+
     # get the login cookie
-    r = post('auth/loginadmin', data = json.dumps({"BEID": settings.BEID, "WebServicesKey": settings.WEB_SERVICES_KEY}))
+    r = post('auth/loginadmin', data=json.dumps({"BEID": settings.BEID, "WebServicesKey": settings.WEB_SERVICES_KEY}))
+    if not r:
+        message = 'Error: post failed. Unable to get login cookie. Issue with BEID or WebServicesKey.'
+
     # save the authentication cookie for future requests to the API
-    default_kwargs['cookies'] = r.cookies
+    default_kwargs['headers']['Authorization'] = "Bearer " + r.content
     r = post("projects/search", data=json.dumps({"CustomAttributes": [{"ID": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
+    if not r:
+        message = 'Error: post failed. Authorization header is invalid. API may have changed.'
+
+    # send error message if necessary
+    if message:
+        mail_admins(subject=subject, message='TESTING. PLEASE IGNORE.'+message, fail_silently=False)
+
     return r.json()
 
 
@@ -45,17 +61,15 @@ def get_info():
     """
     update = UpdateCheck()
     update.last_update = datetime.datetime.utcnow().replace(microsecond=0,tzinfo=utc)
-    projects = get_projects()                              
-    update_table(projects)
+    update_table(get_projects())
     update.save()
-
 
 def update_table(projects):
     '''
     Takes a json object and matches its variables and attributes with those in the
     database. It then modifies current projects and adds new ones.
     '''
-    for data in projects:                       
+    for data in projects:
         proj = Project()
         proj.project_id = data['ID']
         proj.name = data['Name']
