@@ -30,7 +30,6 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 
 ALLOWED_HOSTS = ['10.0.0.10', 'td.dev.research.pdx.edu', '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = (
