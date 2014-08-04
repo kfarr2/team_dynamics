@@ -6,26 +6,37 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
-<body>
+<body style="background-color: #f5f5f1;">
 <!--NAVBAR CLASS - LAYOUT FOR HEADER-->
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-default" style="padding-top: 25px; background-image: url('http://www.pdx.edu/sites/all/themes/pdx_home/images/header/header-1.jpg');">
     <div class="container">
-        <div class="navbar-nav navbar-left" style="margin-top: 7px;">
-            <img src="http://www.pdx.edu/sites/all/themes/pdx_primary/logo.png" alt=""> 
-            <span style="padding-left: 20px; color:#ffffff">Team Dynamix Project Database</span>
+        <div class="navbar-nav navbar-left" style="padding-bottom: 15px;">
+            <table>
+                <td><img src="http://www.pdx.edu/sites/all/themes/pdx_home/logo.png" alt="Portland State University Logo" /></td>
+                <td><span style="font-size: 26px; padding-left: 60px; color: #ffffff;">OIT's Highlighted Projects</span></td>
+            </table>
         </div>
-        <div class="nav navbar-nav navbar-right" style="margin-top:13px;">
-            <span style="color:#ffffff;">Last update: {{last_updated.last_update}}</span>
+        <div class="nav navbar-nav navbar-right" style="margin-top: 15px;">
+            <span style="font-size: 18px; color: #ffffff;">Last update: {{ last_updated.last_update|date }}</span>
         </div>
     </div>
 </div>
 <!--CONTAINER CLASS - LAYOUT FOR TABLE OF INFORMATION FROM DATABASE-->
-{% if project %}
-    <div class="container-fluid">
+<div class="container">
+    <strong>
+        <p>Welcome to the Office of Information Technology's Highlighted Projects page, where we feature projects of interest to the PSU community. OIT completes nearly 100 projects a year. For a complete list of currently active projects and recently completed projects, visit the OIT website at <a href="http://www.pdx.edu/oit">www.pdx.edu/oit</a>.</p>
+        <p>Click on the name of the project to view more information</p>
+    </strong>
+    {% if project %}
         <ul class="nav nav-tabs nav-stacked" role="tablist">
             {% for table in project %}
                 <li class="active">
-                    <a href="#" class="expander"><h3>{{ table.name }}</h3></a>
+                    <a href="#" class="expander">
+                        <h3>
+                            {{ table.name|title }}
+                            <span class="glyphicon glyphicon-chevron-down" style="float: right;"/>
+                        </h3>
+                    </a>
                     <div class="tab-content" style="display:none">
                         <div class="tab-pane active">
                             <div class="well well-lg">
@@ -42,8 +53,8 @@
                 </li>
             {% endfor %}
         </ul>
-    </div>
-{% endif %}
+    {% endif %}
+</div>
 
 <script>
 $(document).ready(function(){
