@@ -22,6 +22,9 @@ except ImportError:
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+here = lambda *path: os.path.normpath(os.path.join(os.path.dirname(__file__), *path))
+ROOT = lambda *path: here("../../", *path)
+
 # Default context processors
 import django.conf.global_settings as DEFAULT_SETTINGS
 
@@ -75,6 +78,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    here("../", "static"),
+)
+
+STATIC_ROOT = ROOT("static")
+
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',        
+)
+
+TEMPLATE_DIRS = (
+    here('../','templates'),
 )
