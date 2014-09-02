@@ -46,7 +46,7 @@ def get_projects():
 
     # save the authentication header for future requests to the API
     default_kwargs['headers']['Authorization'] = "Bearer " + r.content
-    r = post("projects/search", data=json.dumps({"CustomAttributes": [{"ID": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
+    r = post("projects/search", data=json.dumps({"IsOpen": None, "IsActive": None, "CustomAttributes": [{"ID": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
     if not r:
         message = 'Error: post failed. Authorization header is invalid. API may have changed.'
         mail_admins(subject=subject, message=message, fail_silently=False)
