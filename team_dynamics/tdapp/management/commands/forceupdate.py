@@ -69,6 +69,9 @@ def update_table(projects):
     Takes a json object and matches its variables and attributes with those in the
     database. It then modifies current projects and adds new ones.
     '''
+    if len(projects) > 0:
+        Project.objects.all().delete()
+
     for data in projects:
         proj = Project()
         proj.project_id = data['ID']
