@@ -1,5 +1,5 @@
 *.pyc
-team_dynamics/settings/local.py
+td/settings/local.py
 .env
 /static
 

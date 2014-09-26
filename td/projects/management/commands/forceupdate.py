@@ -1,3 +1,4 @@
+from __future__ import print_function
 import json
 import time, datetime
 import requests
@@ -5,7 +6,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.core.mail import mail_admins
 from django.utils.timezone import utc
-from team_dynamics.tdapp.models import Project, UpdateCheck
+from ...models import Project, UpdateCheck
 
 class Command(BaseCommand):
     '''
@@ -71,6 +72,8 @@ def update_table(projects):
     '''
     if len(projects) > 0:
         Project.objects.all().delete()
+    else:
+        print("No projects found")
 
     for data in projects:
         proj = Project()

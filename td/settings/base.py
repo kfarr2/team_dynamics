@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'team_dynamics.tdapp',
+    'td.projects',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,9 +54,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'team_dynamics.urls'
+ROOT_URLCONF = 'td.urls'
 
-WSGI_APPLICATION = 'team_dynamics.wsgi.application'
+WSGI_APPLICATION = 'td.wsgi.application'
 
 
 # Internationalization
