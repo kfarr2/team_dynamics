@@ -15,6 +15,7 @@ class Project(models.Model):
 
     class Meta:
         db_table = 'tdapp_project'
+        ordering = ["name"]
 
 
 class UpdateCheck(models.Model):
@@ -22,4 +23,7 @@ class UpdateCheck(models.Model):
     Responsible for the table showing the most recent updates.
     '''
     last_update = models.DateTimeField(primary_key=True)
+
+    class Meta:
+        db_table = "tdapp_updatecheck"
 

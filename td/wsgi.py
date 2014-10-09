@@ -23,7 +23,7 @@ for item in list(sys.path):
         sys.path.remove(item)
 sys.path[:0] = new_sys_path
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "team_dynamics.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "td.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
