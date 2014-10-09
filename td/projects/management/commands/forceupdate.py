@@ -27,13 +27,9 @@ def post(endpoint, **kwargs):
     '''
     Returns an http post object to calling function using the requests module
     '''
-    # Doesn't work in python 3.3
-    try:
-        # python 2.6
-        return requests.post("https://pdx.teamdynamix.com/TDWebApi/api/" + endpoint, **dict(default_kwargs.items() + kwargs.items()))
-    except TypeError as e:
-        # python 3.3
-        return requests.post("https://pdx.teamdynamix.com/TDWebApi/api/" + endpoint, **dict(list(default_kwargs.items()) + list(kwargs.items())))
+    local_kwargs = default_kwargs.copy()
+    local_kwargs.update(kwargs)
+    return requests.post("https://pdx.teamdynamix.com/TDWebApi/api/" + endpoint, **local_kwargs)
 
 def get_projects():
     '''
@@ -51,12 +47,7 @@ def get_projects():
         return
 
     # save the authentication header for future requests to the API
-    try:
-        # python 2.6
-        default_kwargs['headers']['Authorization'] = "Bearer " + r.content
-    except TypeError as e:
-        # python 3.3
-        default_kwargs['headers']['Authorization'] = "Bearer " + r.text
+    default_kwargs['headers']['Authorization'] = "Bearer " + r.content.decode("utf8")
     r = post("projects/search", data=json.dumps({"IsOpen": None, "IsActive": None, "CustomAttributes": [{"ID": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_ID, "Value": settings.HIGHLIGHTED_PROJECT_ATTRIBUTE_VALUE_ID}]}))
     if not r:
         message = 'Error: post failed. Authorization header is invalid. API may have changed.'
