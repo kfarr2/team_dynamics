@@ -16,8 +16,8 @@ Create a local copy of the settings, and configure the following values:
 
 Ask the repo manager for the specific values.
 
-    cd team_dynamics/settings/local.py.template team_dynamics/settings/local.py
-    vi team_dynamics/settings/local.py
+    cp td/settings/local.py.template td/settings/local.py
+    vi td/settings/local.py
 
 Sync the DB
     
