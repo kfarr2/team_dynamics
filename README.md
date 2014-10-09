@@ -2,9 +2,21 @@
 
 ##Install
     
+### For Python 2.6
+
     virtualenv-2.6 --no-site-packages .env
     source .env/bin/activate
     pip install -r requirements.txt
+
+### For Python 3.3
+
+    pyvenv-3.3 .env
+    source .env/bin/activate
+    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+    python3.3 ez_setup.py
+    easy_install-3.3 pip
+    rm -rf ez_setup.py 
+    pip3.3 install -r requirements.txt
 
 Create a local copy of the settings, and configure the following values:
 
