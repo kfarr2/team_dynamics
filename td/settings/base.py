@@ -31,7 +31,7 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['10.0.0.10', 'td.dev.research.pdx.edu', '127.0.0.1']
+ALLOWED_HOSTS = ['10.0.0.10', 'rc.pdx.edu', '.research.pdx.edu', '127.0.0.1']
 
 # Application definition
 
